@@ -68,16 +68,11 @@ def earth():  # PyWebIO application function
     # output.put_text("hello", str(res))
     output.put_image(src=image, height="50%", width="50%")
 
-    menu()
-
-
 def search():
     search = input.input("Введи название космического обьекта")
     items = get_items(search_text=search)
     res = [[output.put_image(item.img)] for item in items]
     output.put_grid(res, cell_width='300px', cell_height='300px')
-
-    menu()
 
 
 def apod():
@@ -86,8 +81,6 @@ def apod():
     apod_src = data["url"]
     output.put_image(src=apod_src)
     output.put_text(apod_desc)
-
-    menu()
 
 
 start_server(menu, host='0.0.0.0', port=8080, debug=True)
