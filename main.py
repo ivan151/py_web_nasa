@@ -8,38 +8,47 @@ def test():
                             help_text='Unrecoverable after file deletion')
 
 
+def background():
+    html = """<html>
+<head>
+<style>
+body {
+  background-image: url('https://images.unsplash.com/photo-1608754482805-6f630357358b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80');
+}
+</style>
+</head>
+<body>
+
+<h2>Background Image</h2>
+
+</body>
+</html>
+"""
+    output.put_html(html)
+
+
 def menu():
-    choice = input.actions('МЕНЮ', [
+    # background()
+    output.put_buttons([
         {'label': 'Поиск объектов', 'value': 'search'},
         {'label': 'Фото земли по дате', 'value': 'earth'},
         {'label': 'Обьект дня', 'value': 'apod'}
         # {'label': 'Cancel', 'type': 'cancel', 'color': 'danger'},
-    ], help_text='Выбери, что ты хочешь посмотреть')
+    ], onclick=click_res)
 
-    if choice == "search":
-        search()
-    elif choice == "earth":
-        earth()
-    elif choice == "apod":
+
+def click_res(action):
+    if action == "apod":
         apod()
-    # action = info["action"]
-    # if action == "apod":
-    #     apod()
-    # elif action == "earth":
-    #     earth()
-    # elif action == "search":
-    #     search()
-
-    # put_code('info = ' + json.dumps(info, indent=4))
-    # if info is not None:
-    #     save_user(info['username'], info['password'])
-    #     if info['action'] == 'save_and_continue':
-    #         add_next()
+    elif action == "earth":
+        earth()
+    elif action == "search":
+        search()
 
 
 def earth():  # PyWebIO application function
     # Password input
-    date = input.input("Введи дату", type=DATE)
+    date = input.input("Введи дату", type=input.DATE)
     image = get_earth_img(date)
     #
     # # Drop-down selection
